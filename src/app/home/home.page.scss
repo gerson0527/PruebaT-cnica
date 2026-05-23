@@ -1,0 +1,236 @@
+:host {
+  --primary-gradient: linear-gradient(135deg, #6C63FF 0%, #A855F7 100%);
+}
+
+.title-gradient {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+ion-toolbar {
+  --background: transparent;
+}
+
+.search-toolbar {
+  padding: 0 8px 4px;
+}
+
+.custom-searchbar {
+  --border-radius: 14px;
+  --background: rgba(108, 99, 255, 0.08);
+  --placeholder-color: #8888aa;
+  --icon-color: #6C63FF;
+  --color: var(--ion-text-color);
+  padding-top: 0;
+  padding-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.home-content {
+  --background: var(--ion-background-color, #0f0f1a);
+}
+
+// Category chips
+.category-chips-container {
+  display: flex;
+  overflow-x: auto;
+  padding: 4px 16px 8px;
+  gap: 8px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.category-chip {
+  --background: rgba(255, 255, 255, 0.05);
+  --color: #aaa;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &.chip-active {
+    --background: rgba(108, 99, 255, 0.15);
+    --color: #6C63FF;
+    border-color: rgba(108, 99, 255, 0.4);
+    box-shadow: 0 2px 12px rgba(108, 99, 255, 0.2);
+  }
+
+  .chip-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+}
+
+.task-count {
+  padding: 0 20px;
+
+  p {
+    font-size: 0.78rem;
+    margin: 0;
+    opacity: 0.6;
+  }
+}
+
+// Virtual scroll viewport
+.task-list-viewport {
+  height: calc(100vh - 280px);
+  width: 100%;
+}
+
+.task-list {
+  background: transparent;
+  padding: 4px 0;
+}
+
+// Task items
+.task-item {
+  --background: rgba(255, 255, 255, 0.03);
+  --padding-start: 0;
+  --inner-padding-end: 16px;
+  margin: 4px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  &:hover {
+    --background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  &.task-completed {
+    opacity: 0.5;
+
+    .task-title {
+      text-decoration: line-through;
+      color: #666;
+    }
+  }
+
+  .category-indicator {
+    width: 4px;
+    height: 40px;
+    border-radius: 0 4px 4px 0;
+    margin-right: 14px;
+    margin-left: 2px;
+    flex-shrink: 0;
+    transition: height 0.2s ease;
+  }
+
+  .task-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ion-text-color);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+
+  .task-meta {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .category-badge {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 8px;
+    letter-spacing: 0.02em;
+    opacity: 0.85;
+  }
+
+  .priority-badge {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 8px;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+
+    .priority-icon {
+      font-size: 0.7rem;
+    }
+  }
+
+  .completed-icon {
+    color: #2ED573;
+    font-size: 1.3rem;
+  }
+}
+
+// Sliding options styling
+ion-item-option {
+  --border-radius: 14px;
+}
+
+// FAB button
+.add-fab {
+  --background: linear-gradient(135deg, #6C63FF 0%, #A855F7 100%);
+  --box-shadow: 0 4px 20px rgba(108, 99, 255, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: scale(1.08);
+    --box-shadow: 0 6px 28px rgba(108, 99, 255, 0.5);
+  }
+}
+
+ion-fab {
+  margin-bottom: 16px;
+  margin-right: 8px;
+}
+
+// Empty state
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  text-align: center;
+  padding: 0 40px;
+
+  .empty-icon {
+    font-size: 4rem;
+    color: #6C63FF;
+    opacity: 0.5;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ion-text-color);
+    margin-bottom: 8px;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: #888;
+    line-height: 1.5;
+  }
+}
+
+// Toast styling
+.custom-toast {
+  --border-radius: 12px;
+}

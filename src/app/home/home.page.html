@@ -1,0 +1,128 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      <span class="title-gradient">Mis Tareas</span>
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar class="search-toolbar">
+    <ion-searchbar
+      mode="ios"
+      placeholder="Buscar tareas..."
+      [debounce]="300"
+      (ionInput)="onSearchChange($any($event))"
+      animated
+      class="custom-searchbar">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="home-content">
+  <!-- Category filter chips -->
+  <div class="category-chips-container">
+    <ion-chip
+      [class.chip-active]="selectedCategoryId === null"
+      (click)="selectCategory(null)"
+      class="category-chip">
+      <ion-icon name="funnel-outline"></ion-icon>
+      <ion-label>Todas</ion-label>
+    </ion-chip>
+    @for (category of categories; track trackByCategoryId($index, category)) {
+      <ion-chip
+        [class.chip-active]="selectedCategoryId === category.id"
+        (click)="selectCategory(category.id)"
+        class="category-chip"
+        [style.--chip-color]="category.color">
+        <span class="chip-dot" [style.background]="category.color"></span>
+        <ion-label>{{ category.name }}</ion-label>
+      </ion-chip>
+    }
+  </div>
+
+  <!-- Task count -->
+  <div class="task-count">
+    <ion-text color="medium">
+      <p>{{ filteredTasks.length }} tarea{{ filteredTasks.length !== 1 ? 's' : '' }}</p>
+    </ion-text>
+  </div>
+
+  <!-- Task list with virtual scroll -->
+  @if (filteredTasks.length === 0) {
+    <div class="empty-state">
+      <ion-icon name="checkmark-done-outline" class="empty-icon"></ion-icon>
+      <h2>¡Todo listo!</h2>
+      <p>No tienes tareas pendientes. Toca el botón + para agregar una.</p>
+    </div>
+  } @else {
+    <cdk-virtual-scroll-viewport itemSize="72" class="task-list-viewport">
+      <ion-list lines="none" class="task-list">
+        @for (task of filteredTasks; track trackById($index, task)) {
+          <ion-item-sliding #slidingItem>
+            <ion-item-options side="start">
+              <ion-item-option
+                color="success"
+                (click)="toggleComplete(task); slidingItem.close()">
+                <ion-icon slot="icon-only" name="checkmark-done-outline"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+
+            <ion-item
+              class="task-item"
+              [class.task-completed]="task.completed"
+              (click)="editTask(task)"
+              button
+              detail="false">
+              <div class="category-indicator" slot="start"
+                [style.background]="getCategoryColor(task.categoryId)">
+              </div>
+              <ion-label>
+                <h2 class="task-title">{{ task.title }}</h2>
+                <div class="task-meta">
+                  <ion-badge
+                    class="category-badge"
+                    [style.--background]="getCategoryColor(task.categoryId)">
+                    {{ getCategoryName(task.categoryId) }}
+                  </ion-badge>
+                  @if (showPriority && task.priority) {
+                    <ion-badge
+                      class="priority-badge"
+                      [style.--background]="getPriorityColor(task.priority)">
+                      <ion-icon [name]="getPriorityIcon(task.priority)" class="priority-icon"></ion-icon>
+                      {{ getPriorityLabel(task.priority) }}
+                    </ion-badge>
+                  }
+                </div>
+              </ion-label>
+              @if (task.completed) {
+                <ion-icon
+                  name="checkmark-circle"
+                  slot="end"
+                  class="completed-icon">
+                </ion-icon>
+              }
+            </ion-item>
+
+            <ion-item-options side="end">
+              <ion-item-option
+                color="danger"
+                (click)="deleteTask(task); slidingItem.close()">
+                <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+              </ion-item-option>
+              <ion-item-option
+                color="primary"
+                (click)="editTask(task); slidingItem.close()">
+                <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        }
+      </ion-list>
+    </cdk-virtual-scroll-viewport>
+  }
+
+  <!-- FAB button -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="addTask()" class="add-fab">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

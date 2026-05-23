@@ -1,0 +1,146 @@
+:host {
+  --primary-gradient: linear-gradient(135deg, #6C63FF 0%, #A855F7 100%);
+}
+
+.title-gradient {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  font-size: 1.4rem;
+}
+
+ion-toolbar {
+  --background: transparent;
+}
+
+.detail-content {
+  --background: var(--ion-background-color, #0f0f1a);
+}
+
+.form-container {
+  padding: 8px 16px;
+}
+
+.form-section {
+  margin-bottom: 20px;
+
+  ion-list-header {
+    --background: transparent;
+    padding-left: 4px;
+    margin-bottom: 6px;
+    min-height: 28px;
+  }
+
+  .section-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #8888aa;
+  }
+}
+
+.form-item {
+  --background: rgba(255, 255, 255, 0.04);
+  --padding-start: 16px;
+  --inner-padding-end: 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  margin: 0 4px;
+  transition: border-color 0.3s ease;
+
+  &:focus-within {
+    border-color: rgba(108, 99, 255, 0.4);
+  }
+
+  .task-input {
+    --placeholder-color: #666;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .category-select {
+    width: 100%;
+    --placeholder-color: #666;
+  }
+}
+
+// Priority section
+.priority-section {
+  .priority-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 0 4px;
+  }
+
+  .priority-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 8px;
+    border-radius: 14px;
+    border: 1.5px solid rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.03);
+    color: #888;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.8rem;
+    font-weight: 600;
+
+    ion-icon {
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    &.priority-active {
+      border-color: var(--priority-color);
+      background: color-mix(in srgb, var(--priority-color) 12%, transparent);
+      color: var(--priority-color);
+      box-shadow: 0 2px 16px color-mix(in srgb, var(--priority-color) 25%, transparent);
+
+      ion-icon {
+        transform: scale(1.15);
+      }
+    }
+
+    &:hover:not(.priority-active) {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+}
+
+// Save button
+.action-section {
+  margin-top: 32px;
+  padding: 0 4px;
+}
+
+.save-button {
+  --background: linear-gradient(135deg, #6C63FF 0%, #A855F7 100%);
+  --border-radius: 14px;
+  --box-shadow: 0 4px 20px rgba(108, 99, 255, 0.3);
+  font-weight: 700;
+  font-size: 1rem;
+  height: 52px;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    --box-shadow: 0 6px 24px rgba(108, 99, 255, 0.4);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+  }
+}
+
+ion-back-button,
+ion-button[fill="clear"] {
+  --color: #6C63FF;
+}

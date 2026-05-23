@@ -1,37 +1,115 @@
 /*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
+ * TodoApp Global Styles
+ * Dark premium theme with Inter font
  */
 
-/* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
-
-/* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
-@import "@ionic/angular/css/display.css";
-
-/* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+@import "@ionic/angular/css/display.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
- */
+/* Google Font — Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  background: #0f0f1a;
+  color: #e8e8f0;
+}
+
+/* Smooth scrolling */
+ion-content {
+  --keyboard-offset: 0px !important;
+}
+
+/* Alert styling */
+ion-alert {
+  --background: #1e1e2e;
+
+  .alert-wrapper {
+    border-radius: 16px !important;
+    background: #1e1e2e !important;
+  }
+
+  .alert-head {
+    h2 {
+      color: #e8e8f0 !important;
+      font-weight: 700 !important;
+    }
+  }
+
+  .alert-message {
+    color: #aaa !important;
+  }
+
+  .alert-input-wrapper {
+    input {
+      background: rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      border-radius: 10px !important;
+      color: #e8e8f0 !important;
+      padding: 12px !important;
+    }
+  }
+
+  .alert-button {
+    color: #6C63FF !important;
+    font-weight: 600 !important;
+
+    &.alert-button-role-destructive {
+      color: #FF4757 !important;
+    }
+  }
+
+  .alert-radio-label {
+    color: #e8e8f0 !important;
+  }
+}
+
+/* Action sheet styling */
+ion-action-sheet {
+  --background: #1e1e2e;
+  --color: #e8e8f0;
+
+  .action-sheet-container {
+    border-radius: 16px 16px 0 0;
+  }
+
+  .action-sheet-button {
+    color: #e8e8f0 !important;
+  }
+}
+
+/* Toast styling */
+ion-toast {
+  --border-radius: 12px;
+  font-weight: 500;
+}
+
+/* Ripple effect color */
+ion-ripple-effect {
+  --color: rgba(108, 99, 255, 0.2);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(108, 99, 255, 0.3);
+  border-radius: 4px;
+}

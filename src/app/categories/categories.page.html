@@ -1,0 +1,55 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      <span class="title-gradient">Categorías</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="categories-content">
+  @if (categories.length === 0) {
+    <div class="empty-state">
+      <ion-icon name="color-palette-outline" class="empty-icon"></ion-icon>
+      <h2>Sin categorías</h2>
+      <p>Crea tu primera categoría para organizar tus tareas.</p>
+    </div>
+  } @else {
+    <ion-list lines="none" class="category-list">
+      @for (category of categories; track trackById($index, category)) {
+        <ion-item-sliding #slidingItem>
+          <ion-item class="category-item" button detail="false"
+            (click)="editCategory(category)">
+            <div class="color-preview" slot="start"
+              [style.background]="category.color"
+              (click)="$event.stopPropagation(); changeColor(category)">
+            </div>
+            <ion-label>
+              <h2 class="category-name">{{ category.name }}</h2>
+              <ion-note class="category-color-text">{{ category.color }}</ion-note>
+            </ion-label>
+            <ion-icon name="create-outline" slot="end" class="edit-icon"
+              (click)="$event.stopPropagation(); editCategory(category)">
+            </ion-icon>
+          </ion-item>
+
+          <ion-item-options side="end">
+            <ion-item-option color="tertiary"
+              (click)="changeColor(category); slidingItem.close()">
+              <ion-icon slot="icon-only" name="color-palette-outline"></ion-icon>
+            </ion-item-option>
+            <ion-item-option color="danger"
+              (click)="deleteCategory(category); slidingItem.close()">
+              <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      }
+    </ion-list>
+  }
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="addCategory()" class="add-fab">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

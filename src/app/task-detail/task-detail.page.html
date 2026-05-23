@@ -1,0 +1,86 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()" fill="clear">
+        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span class="title-gradient">{{ isEditing ? 'Editar Tarea' : 'Nueva Tarea' }}</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="detail-content">
+  <div class="form-container">
+    <!-- Task title -->
+    <div class="form-section">
+      <ion-list-header>
+        <ion-label class="section-label">Título</ion-label>
+      </ion-list-header>
+      <ion-item class="form-item" lines="none">
+        <ion-input
+          [(ngModel)]="taskTitle"
+          placeholder="¿Qué necesitas hacer?"
+          type="text"
+          class="task-input"
+          [clearInput]="true">
+        </ion-input>
+      </ion-item>
+    </div>
+
+    <!-- Category selector -->
+    <div class="form-section">
+      <ion-list-header>
+        <ion-label class="section-label">Categoría</ion-label>
+      </ion-list-header>
+      <ion-item class="form-item" lines="none">
+        <ion-select
+          [(ngModel)]="selectedCategoryId"
+          placeholder="Seleccionar categoría"
+          interface="action-sheet"
+          class="category-select">
+          <ion-select-option [value]="null">Sin categoría</ion-select-option>
+          @for (category of categories; track category.id) {
+            <ion-select-option [value]="category.id">
+              {{ category.name }}
+            </ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <!-- Priority selector (controlled by feature flag) -->
+    @if (showPriority) {
+      <div class="form-section priority-section">
+        <ion-list-header>
+          <ion-label class="section-label">Prioridad</ion-label>
+        </ion-list-header>
+        <div class="priority-buttons">
+          @for (p of priorities; track p.value) {
+            <button
+              class="priority-btn"
+              [class.priority-active]="selectedPriority === p.value"
+              [style.--priority-color]="p.color"
+              (click)="selectPriority(p.value)">
+              <ion-icon [name]="p.icon"></ion-icon>
+              <span>{{ p.label }}</span>
+            </button>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- Save button -->
+    <div class="action-section">
+      <ion-button
+        expand="block"
+        class="save-button"
+        (click)="saveTask()"
+        [disabled]="!taskTitle.trim()">
+        <ion-icon name="checkmark-outline" slot="start"></ion-icon>
+        {{ isEditing ? 'Guardar Cambios' : 'Crear Tarea' }}
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
