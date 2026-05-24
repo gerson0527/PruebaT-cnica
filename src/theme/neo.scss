@@ -1,0 +1,143 @@
+@use 'neo-mixins' as *;
+
+.neo-page-title {
+  @include neo-title;
+}
+
+.neo-section-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--neo-text);
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+}
+
+.neo-card {
+  @include neo-surface;
+}
+
+.neo-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: var(--neo-surface);
+  border: var(--neo-border-width) solid var(--neo-border);
+  border-radius: var(--neo-radius-pill);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--neo-text);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--neo-border);
+  }
+
+  &.neo-chip-active {
+    background: var(--neo-coral);
+    color: #fff;
+    box-shadow: var(--neo-shadow-sm);
+  }
+}
+
+.neo-btn-primary {
+  --background: var(--neo-coral);
+  --background-activated: #f06f58;
+  --background-hover: #ff8f7a;
+  --background-focused: var(--neo-coral);
+  --color: #fff;
+  --border-radius: var(--neo-radius-pill);
+  --box-shadow: none;
+  --ripple-color: transparent;
+  margin: 0;
+  height: 52px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  box-shadow: none;
+
+  &::part(native) {
+    border: var(--neo-border-width) solid var(--neo-border);
+    border-radius: var(--neo-radius-pill);
+    box-shadow: var(--neo-shadow);
+    background: var(--neo-coral);
+  }
+}
+
+.neo-icon-btn {
+  @include neo-surface(var(--neo-radius-sm));
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: var(--neo-surface);
+  color: var(--neo-text);
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 1.25rem;
+  }
+}
+
+.neo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: var(--neo-radius-pill);
+  border: var(--neo-border-width) solid var(--neo-border);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--neo-text);
+  background: var(--badge-bg, var(--neo-surface));
+}
+
+.neo-progress-ring {
+  --ring-size: 48px;
+  --ring-color: var(--neo-blue);
+  --ring-value: 0;
+  width: var(--ring-size);
+  height: var(--ring-size);
+  flex-shrink: 0;
+  position: relative;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .ring-track {
+    fill: none;
+    stroke: #e8e8e8;
+    stroke-width: 4;
+  }
+
+  .ring-value {
+    fill: none;
+    stroke: var(--ring-color);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 100;
+    stroke-dashoffset: calc(100 - var(--ring-value));
+    transition: stroke-dashoffset 0.4s ease;
+  }
+
+  .ring-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--neo-text);
+  }
+}

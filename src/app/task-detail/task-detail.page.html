@@ -1,23 +1,20 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="goBack()" fill="clear">
-        <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
-      </ion-button>
+      <button type="button" class="neo-icon-btn" (click)="goBack()" aria-label="Volver">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </button>
     </ion-buttons>
     <ion-title>
-      <span class="title-gradient">{{ isEditing ? 'Editar Tarea' : 'Nueva Tarea' }}</span>
+      <span class="neo-page-title">{{ isEditing ? 'Editar Tarea' : 'Nueva Tarea' }}</span>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="detail-content">
   <div class="form-container">
-    <!-- Task title -->
-    <div class="form-section">
-      <ion-list-header>
-        <ion-label class="section-label">Título</ion-label>
-      </ion-list-header>
+    <div class="form-section neo-card">
+      <label class="section-label">Título</label>
       <ion-item class="form-item" lines="none">
         <ion-input
           [(ngModel)]="taskTitle"
@@ -29,11 +26,8 @@
       </ion-item>
     </div>
 
-    <!-- Category selector -->
-    <div class="form-section">
-      <ion-list-header>
-        <ion-label class="section-label">Categoría</ion-label>
-      </ion-list-header>
+    <div class="form-section neo-card">
+      <label class="section-label">Categoría</label>
       <ion-item class="form-item" lines="none">
         <ion-select
           [(ngModel)]="selectedCategoryId"
@@ -50,15 +44,13 @@
       </ion-item>
     </div>
 
-    <!-- Priority selector (controlled by feature flag) -->
     @if (showPriority) {
-      <div class="form-section priority-section">
-        <ion-list-header>
-          <ion-label class="section-label">Prioridad</ion-label>
-        </ion-list-header>
+      <div class="form-section neo-card priority-section">
+        <label class="section-label">Prioridad</label>
         <div class="priority-buttons">
           @for (p of priorities; track p.value) {
             <button
+              type="button"
               class="priority-btn"
               [class.priority-active]="selectedPriority === p.value"
               [style.--priority-color]="p.color"
@@ -71,11 +63,10 @@
       </div>
     }
 
-    <!-- Save button -->
     <div class="action-section">
       <ion-button
         expand="block"
-        class="save-button"
+        class="neo-btn-primary save-button"
         (click)="saveTask()"
         [disabled]="!taskTitle.trim()">
         <ion-icon name="checkmark-outline" slot="start"></ion-icon>

@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import {
-  IonHeader, IonToolbar, IonTitle, IonContent, IonList,
-  IonItem, IonLabel, IonItemSliding, IonItemOptions,
+  IonHeader, IonToolbar, IonTitle, IonContent,
+  IonItem, IonItemSliding, IonItemOptions,
   IonItemOption, IonFab, IonFabButton, IonIcon,
-  IonNote, AlertController, ToastController
+  AlertController, ToastController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { addOutline, trashOutline, createOutline, colorPaletteOutline } from 'ionicons/icons';
@@ -19,10 +19,9 @@ import { CategoryService } from '../services/category.service';
   standalone: true,
   imports: [
     CommonModule, FormsModule,
-    IonHeader, IonToolbar, IonTitle, IonContent, IonList,
-    IonItem, IonLabel, IonItemSliding, IonItemOptions,
+    IonHeader, IonToolbar, IonTitle, IonContent,
+    IonItem, IonItemSliding, IonItemOptions,
     IonItemOption, IonFab, IonFabButton, IonIcon,
-    IonNote,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './categories.page.html',

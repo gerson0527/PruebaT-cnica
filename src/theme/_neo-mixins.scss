@@ -1,0 +1,22 @@
+@mixin neo-surface($radius: var(--neo-radius)) {
+  background: var(--neo-surface);
+  border: var(--neo-border-width) solid var(--neo-border);
+  border-radius: $radius;
+  box-shadow: var(--neo-shadow);
+}
+
+@mixin neo-title {
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
+  color: var(--neo-text);
+  margin: 0;
+}
+
+@mixin neo-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--neo-text-muted);
+}

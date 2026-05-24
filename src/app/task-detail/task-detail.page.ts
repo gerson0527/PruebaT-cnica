@@ -5,8 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonButton,
-  IonItem, IonLabel, IonInput, IonSelect, IonSelectOption,
-  IonIcon, IonButtons, IonListHeader,
+  IonItem, IonInput, IonSelect, IonSelectOption,
+  IonIcon, IonButtons,
   ToastController, NavController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
@@ -27,8 +27,8 @@ import { FeatureFlagService } from '../services/feature-flag.service';
   imports: [
     CommonModule, FormsModule,
     IonHeader, IonToolbar, IonTitle, IonContent, IonButton,
-    IonItem, IonLabel, IonInput, IonSelect, IonSelectOption,
-    IonIcon, IonButtons, IonListHeader,
+    IonItem, IonInput, IonSelect, IonSelectOption,
+    IonIcon, IonButtons,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './task-detail.page.html',
@@ -44,9 +44,9 @@ export class TaskDetailPage implements OnInit, OnDestroy {
   showPriority = false;
 
   readonly priorities: { value: Priority; label: string; color: string; icon: string }[] = [
-    { value: 'alta', label: 'Alta', color: '#FF4757', icon: 'arrow-up-circle-outline' },
-    { value: 'media', label: 'Media', color: '#FFA502', icon: 'remove-circle-outline' },
-    { value: 'baja', label: 'Baja', color: '#2ED573', icon: 'arrow-down-circle-outline' },
+    { value: 'alta', label: 'Alta', color: '#ff7e67', icon: 'arrow-up-circle-outline' },
+    { value: 'media', label: 'Media', color: '#ffb74d', icon: 'remove-circle-outline' },
+    { value: 'baja', label: 'Baja', color: '#4db6ac', icon: 'arrow-down-circle-outline' },
   ];
 
   private subscriptions = new Subscription();

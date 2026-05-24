@@ -1,6 +1,6 @@
 # TodoApp — Gestor de Tareas
 
-Aplicación completa de gestión de tareas construida con **Ionic + Angular** con soporte para categorías, prioridades (via Firebase Remote Config), y compilación nativa con Capacitor.
+Aplicación completa de gestión de tareas construida con **Ionic + Angular** con soporte para categorías, prioridades (via Firebase Remote Config), y compilación nativa con **Apache Cordova**.
 
 ---
 
@@ -20,7 +20,8 @@ TodoApp es una aplicación móvil/web de gestión de tareas que permite:
 |---|---|
 | Ionic | 8+ |
 | Angular | 20 (standalone components) |
-| Capacitor | 8 |
+| Apache Cordova | 12 |
+| cordova-android | 14 |
 | @ionic/storage-angular | Latest |
 | @angular/fire + Firebase | Latest |
 | TypeScript | 5.9 (strict mode) |
@@ -30,9 +31,20 @@ TodoApp es una aplicación móvil/web de gestión de tareas que permite:
 - **Node.js** >= 18.x
 - **npm** >= 9.x
 - **Ionic CLI**: `npm install -g @ionic/cli`
-- **Android Studio** (para compilar Android)
-- **Xcode 14+** (para compilar iOS, solo en Mac)
+- **Android Studio** + Android SDK (para compilar Android)
+- **Xcode 14+** (para iOS, solo en Mac)
 - Cuenta de Firebase (para Remote Config)
+
+### Variable ANDROID_HOME (Windows)
+
+Si `cordova build android` falla, configura el SDK en PowerShell:
+
+```powershell
+$env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
+$env:PATH += ";$env:ANDROID_HOME\platform-tools;$env:ANDROID_HOME\tools"
+```
+
+Instala **Android Studio** y el SDK desde **SDK Manager** si aún no lo tienes.
 
 ## 🚀 Instalación
 
@@ -40,47 +52,62 @@ TodoApp es una aplicación móvil/web de gestión de tareas que permite:
 git clone <repository-url>
 cd todo-app
 npm install
-ionic build
-npx cap sync
+npm run build:cordova
+npx cordova platform add android
 ```
+
+> La primera vez, Cordova crea la carpeta `platforms/android`. iOS: `npx cordova platform add ios` (requiere Mac).
 
 ## 💻 Ejecución en navegador
 
 ```bash
-ionic serve
+npm start
 ```
 
-## 📱 Ejecución en Android
+## 📱 Compilar Android con Cordova
 
-1. Asegúrate de tener Android Studio instalado
-2. Ejecuta:
-```bash
-ionic capacitor build android --prod
-```
-3. O directamente desde la CLI:
-```bash
-npx cap run android
-```
-
-### Generar APK de Debug:
-```bash
-cd android
-./gradlew assembleDebug
-```
-El APK queda en: `android/app/build/outputs/apk/debug/`
-
-### Generar APK de Release:
-```bash
-cd android
-./gradlew assembleRelease
-```
-
-## 🍎 Ejecución en iOS (requiere Mac + Xcode 14+)
+### APK de debug (entrega / pruebas)
 
 ```bash
-ionic capacitor build ios --prod
+npm run cordova:android:debug
 ```
-- Abrir el proyecto en Xcode → Product → Archive → Distribute App
+
+APK generado en:
+
+```
+platforms/android/app/build/outputs/apk/debug/app-debug.apk
+```
+
+### APK de release
+
+```bash
+npm run cordova:android:release
+```
+
+### Ejecutar en emulador o dispositivo
+
+```bash
+npm run cordova:run:android
+```
+
+### Abrir en Android Studio (opcional)
+
+```bash
+npm run build:cordova
+npx cordova prepare android
+```
+
+Luego abre `platforms/android` en Android Studio.
+
+## 🍎 Compilar iOS con Cordova (Mac + Xcode)
+
+```bash
+npm run build:cordova
+npx cordova platform add ios
+npm run cordova:ios
+```
+
+Abrir `platforms/ios/TodoApp.xcworkspace` en Xcode → Product → Archive.
 
 ## 🔧 Variables de Entorno
 
