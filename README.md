@@ -40,6 +40,8 @@ En Firebase Console → Remote Config, crea el parámetro:
 - Apache Cordova
 - Firebase Remote Config
 - Ionic Storage
+##APK:
+platforms/android/app/build/outputs/apk/debug/app-debug.apk (no suele ir al repo; adjúntalo o indica cómo generarlo con npm run cordova:android:debug)
 
 ## Requisitos
 
