@@ -1,7 +1,8 @@
 /*
- * TodoApp Global Styles
- * Dark premium theme with Inter font
+ * TodoApp — Neubrutalism theme (Inter)
  */
+
+@use './theme/neo';
 
 @import "@ionic/angular/css/core.css";
 @import "@ionic/angular/css/normalize.css";
@@ -14,102 +15,215 @@
 @import "@ionic/angular/css/flex-utils.css";
 @import "@ionic/angular/css/display.css";
 
-/* Google Font — Inter */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 * {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--ion-font-family);
 }
 
 body {
-  background: #0f0f1a;
-  color: #e8e8f0;
+  background: var(--neo-bg);
+  color: var(--neo-text);
 }
 
-/* Smooth scrolling */
 ion-content {
+  --background: var(--neo-bg);
   --keyboard-offset: 0px !important;
 }
 
-/* Alert styling */
+ion-toolbar {
+  --background: var(--neo-bg);
+  --color: var(--neo-text);
+  --border-width: 0;
+}
+
+ion-header::after {
+  display: none;
+}
+
+ion-searchbar {
+  --background: var(--neo-surface);
+  --border-radius: var(--neo-radius);
+  --box-shadow: var(--neo-shadow-sm);
+  --color: var(--neo-text);
+  --placeholder-color: var(--neo-text-muted);
+  --icon-color: var(--neo-text);
+  padding: 0;
+  border: var(--neo-border-width) solid var(--neo-border);
+  border-radius: var(--neo-radius);
+}
+
 ion-alert {
-  --background: #1e1e2e;
+  --background: var(--neo-surface);
 
   .alert-wrapper {
-    border-radius: 16px !important;
-    background: #1e1e2e !important;
+    border-radius: var(--neo-radius) !important;
+    background: var(--neo-surface) !important;
+    border: var(--neo-border-width) solid var(--neo-border) !important;
+    box-shadow: var(--neo-shadow) !important;
   }
 
-  .alert-head {
-    h2 {
-      color: #e8e8f0 !important;
-      font-weight: 700 !important;
-    }
+  .alert-head h2 {
+    color: var(--neo-text) !important;
+    font-weight: 800 !important;
   }
 
   .alert-message {
-    color: #aaa !important;
+    color: var(--neo-text-muted) !important;
   }
 
-  .alert-input-wrapper {
-    input {
-      background: rgba(255, 255, 255, 0.05) !important;
-      border: 1px solid rgba(255, 255, 255, 0.1) !important;
-      border-radius: 10px !important;
-      color: #e8e8f0 !important;
-      padding: 12px !important;
-    }
+  .alert-input-wrapper input {
+    background: var(--neo-bg) !important;
+    border: var(--neo-border-width) solid var(--neo-border) !important;
+    border-radius: var(--neo-radius-sm) !important;
+    color: var(--neo-text) !important;
   }
 
   .alert-button {
-    color: #6C63FF !important;
-    font-weight: 600 !important;
+    color: var(--neo-coral) !important;
+    font-weight: 700 !important;
+  }
+}
 
-    &.alert-button-role-destructive {
-      color: #FF4757 !important;
+ion-action-sheet {
+  --background: var(--neo-surface);
+  --color: var(--neo-text);
+
+  .action-sheet-button {
+    color: var(--neo-text) !important;
+    font-weight: 600;
+  }
+}
+
+ion-toast {
+  --border-radius: var(--neo-radius-sm);
+  font-weight: 700;
+}
+
+ion-fab-button {
+  --background: var(--neo-coral);
+  --color: #fff;
+  --box-shadow: none;
+
+  &::part(native) {
+    border: var(--neo-border-width) solid var(--neo-border);
+    border-radius: 50%;
+    box-shadow: var(--neo-shadow-sm);
+  }
+}
+
+// Bottom tab bar — neubrutalism
+ion-tab-bar.neo-tab-bar {
+  --background: var(--neo-surface);
+  --border: none;
+  height: 72px;
+  padding-top: 0;
+  padding-bottom: env(safe-area-inset-bottom);
+  border-top: var(--neo-border-width) solid var(--neo-border);
+  box-shadow: none;
+  align-items: center;
+
+  ion-tab-button {
+    --background: transparent;
+    --background-focused: transparent;
+    --color: var(--neo-text-muted);
+    --color-selected: var(--neo-text);
+    --padding-top: 0;
+    --padding-bottom: 0;
+    --padding-start: 0;
+    --padding-end: 0;
+    font-weight: 700;
+    font-size: 0.65rem;
+    height: 100%;
+    max-height: 72px;
+
+    &::part(native) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 100%;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    ion-icon {
+      font-size: 1.35rem;
+      margin: 0;
+    }
+
+    ion-label {
+      margin: 0;
+    }
+
+    &.tab-selected ion-label {
+      color: var(--neo-coral);
+      font-weight: 800;
     }
   }
 
-  .alert-radio-label {
-    color: #e8e8f0 !important;
+  ion-tab-button.tab-add {
+    --color-selected: var(--neo-coral);
+    --ripple-color: transparent;
+
+    &::part(native) {
+      background: transparent !important;
+      box-shadow: none !important;
+    }
+
+    &.tab-selected::part(native) {
+      background: transparent !important;
+    }
+
+    .add-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      margin: 0;
+      background: var(--neo-coral);
+      border: var(--neo-border-width) solid var(--neo-border);
+      border-radius: 50%;
+      box-shadow: var(--neo-shadow-sm);
+      color: #fff;
+      pointer-events: none;
+      flex-shrink: 0;
+    }
+
+    .add-btn ion-icon {
+      font-size: 1.5rem;
+    }
+
+    &.tab-selected .add-btn {
+      background: var(--neo-coral);
+    }
   }
 }
 
-/* Action sheet styling */
-ion-action-sheet {
-  --background: #1e1e2e;
-  --color: #e8e8f0;
+ion-item-option {
+  font-weight: 700;
+}
 
-  .action-sheet-container {
-    border-radius: 16px 16px 0 0;
+ion-button.neo-btn-primary {
+  --box-shadow: none;
+  box-shadow: none !important;
+  border-radius: var(--neo-radius-pill);
+  overflow: visible;
+
+  &::part(native) {
+    border-radius: var(--neo-radius-pill);
+    box-shadow: var(--neo-shadow);
+    background: var(--neo-coral);
   }
-
-  .action-sheet-button {
-    color: #e8e8f0 !important;
-  }
 }
 
-/* Toast styling */
-ion-toast {
-  --border-radius: 12px;
-  font-weight: 500;
-}
-
-/* Ripple effect color */
-ion-ripple-effect {
-  --color: rgba(108, 99, 255, 0.2);
-}
-
-/* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(108, 99, 255, 0.3);
-  border-radius: 4px;
+  background: var(--neo-border);
+  border-radius: 6px;
 }

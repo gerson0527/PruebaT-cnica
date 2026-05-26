@@ -1,15 +1,22 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { inject, Injectable, Injector, runInInjectionContext } from '@angular/core';
+import {
+  fetchAndActivate,
+  getValue,
+  RemoteConfig,
+} from '@angular/fire/remote-config';
+import { BehaviorSubject, filter, map, Observable } from 'rxjs';
 
 /**
  * Feature Flag Service
  * Uses Firebase Remote Config when available, with local fallback.
- * The service gracefully degrades if Firebase is not configured.
  */
 @Injectable({
   providedIn: 'root'
 })
 export class FeatureFlagService {
+  private remoteConfig = inject(RemoteConfig);
+  private injector = inject(Injector);
+
   private featureFlags$ = new BehaviorSubject<Record<string, boolean>>({
     show_priority_feature: false
   });
@@ -22,50 +29,39 @@ export class FeatureFlagService {
 
   private async init(): Promise<void> {
     try {
-      // Attempt to use Firebase Remote Config
-      const { getRemoteConfig, fetchAndActivate, getValue } = await import('firebase/remote-config');
-      const { getApp } = await import('firebase/app');
-
-      const app = getApp();
-      const remoteConfig = getRemoteConfig(app);
-
-      // Set minimum fetch interval
-      remoteConfig.settings.minimumFetchIntervalMillis =
+      this.remoteConfig.settings.minimumFetchIntervalMillis =
         window.location.hostname === 'localhost' ? 0 : 300000;
-
-      // Set defaults
-      remoteConfig.defaultConfig = {
+      this.remoteConfig.defaultConfig = {
         show_priority_feature: false
       };
 
-      await fetchAndActivate(remoteConfig);
+      await runInInjectionContext(
+        this.injector,
+        () => fetchAndActivate(this.remoteConfig)
+      );
 
-      const showPriority = getValue(remoteConfig, 'show_priority_feature').asBoolean();
+      const showPriority = runInInjectionContext(this.injector, () =>
+        getValue(this.remoteConfig, 'show_priority_feature').asBoolean()
+      );
+
+      this.initialized = true;
       this.featureFlags$.next({
         ...this.featureFlags$.value,
         show_priority_feature: showPriority
       });
-
+    } catch {
       this.initialized = true;
-      console.log('Remote Config loaded. show_priority_feature:', showPriority);
-    } catch (error) {
-      console.warn('Firebase Remote Config not available, using defaults:', error);
-      this.initialized = true;
+      this.featureFlags$.next(this.featureFlags$.value);
     }
   }
 
   isFeatureEnabled(key: string): Observable<boolean> {
-    return new Observable<boolean>(subscriber => {
-      const sub = this.featureFlags$.subscribe(flags => {
-        subscriber.next(flags[key] ?? false);
-      });
-      return () => sub.unsubscribe();
-    });
+    return this.featureFlags$.pipe(
+      filter(() => this.initialized),
+      map(flags => flags[key] ?? false)
+    );
   }
 
-  /**
-   * For development/testing: manually toggle a feature flag
-   */
   toggleFeatureFlag(key: string, value: boolean): void {
     this.featureFlags$.next({
       ...this.featureFlags$.value,
