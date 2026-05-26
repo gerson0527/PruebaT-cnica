@@ -16,7 +16,8 @@
     "cordova:android:release": "node scripts/cordova-build.js android --release",
     "cordova:android:debug": "node scripts/cordova-build.js android --debug",
     "cordova:ios": "node scripts/cordova-build.js ios",
-    "cordova:run:android": "npm run cordova:android:debug"
+    "cordova:run:android": "npm run cordova:android:debug",
+    "screenshots": "node scripts/capture-screenshots.mjs"
   },
   "private": true,
   "dependencies": {
@@ -70,6 +71,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "playwright": "^1.60.0",
     "typescript": "~5.9.0"
   },
   "description": "An Ionic project",

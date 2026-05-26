@@ -58,3 +58,15 @@ platforms/android/app/build/outputs/apk/debug/app-debug.apk (no suele ir al repo
 git clone <repositorio>
 cd todo-app
 npm install
+```
+
+## Capturas de pantalla
+
+| Vista | Descripción |
+|-------|-------------|
+| ![Home](docs/screenshots/01-home.png) | Lista de tareas y estadísticas |
+| ![Categorías](docs/screenshots/02-categories.png) | Gestión de categorías |
+| ![Nueva tarea](docs/screenshots/03-nueva-tarea.png) | Formulario de tarea |
+| ![Filtros](docs/screenshots/04-filtros.png) | Filtros por estado y categoría |
+
+Regenerar (Node 20+): `npx playwright install chromium` y `npm run screenshots`.
